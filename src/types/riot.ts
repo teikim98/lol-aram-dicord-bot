@@ -114,3 +114,41 @@ export interface AramStatsSummary {
 }
 
 
+export interface DataDragonChampion {
+  id: string;      // 영문 ID (예: "Aatrox")
+  key: string;     // 숫자 키 (예: "266")
+  name: string;    // 현지화된 이름 (예: "아트록스")
+  title: string;   // 현지화된 칭호 (예: "다르킨의 검")
+}
+
+// Data Dragon 챔피언 전체 데이터
+export interface DataDragonChampionData {
+  data: {
+    [championId: string]: DataDragonChampion;
+  };
+}
+
+// 기존 타입들 아래에 추가
+
+// 챔피언별 통계
+export interface ChampionStats {
+  championName: string;
+  championNameKR?: string;  // 한글 이름
+  games: number;
+  wins: number;
+  losses: number;
+  kills: number;
+  deaths: number;
+  assists: number;
+  winRate: number;
+  averageKDA: number;
+}
+
+// 챔피언 통계 요약
+export interface ChampionStatsSummary {
+  totalGames: number;
+  uniqueChampions: number;
+  championStats: ChampionStats[];
+  mostPlayed: ChampionStats[];      // 많이 플레이한 챔피언
+  highestWinRate: ChampionStats[];  // 높은 승률 챔피언
+}
