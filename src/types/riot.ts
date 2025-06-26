@@ -46,3 +46,71 @@ export const regionToCluster: Record<Region, RegionCluster> = {
   'ru': 'europe',
   'oc1': 'americas'
 };
+
+// 게임 큐 타입 (ARAM = 450)
+export const QUEUE_TYPE = {
+  ARAM: 450,
+  NORMAL_DRAFT: 400,
+  RANKED_SOLO: 420,
+  RANKED_FLEX: 440,
+} as const;
+
+// 매치 리스트 아이템
+export interface MatchReference {
+  matchId: string;
+  queueId: number;
+  gameCreation: number;
+  gameDuration: number;
+}
+
+// 매치 상세 정보
+export interface Match {
+  metadata: {
+    matchId: string;
+    participants: string[];  // PUUID 리스트
+  };
+  info: {
+    gameCreation: number;
+    gameDuration: number;
+    queueId: number;
+    participants: Participant[];
+  };
+}
+
+// 매치 참가자 정보
+export interface Participant {
+  puuid: string;
+  summonerName: string;
+  championName: string;
+  championId: number;
+  kills: number;
+  deaths: number;
+  assists: number;
+  win: boolean;
+  totalDamageDealtToChampions: number;
+  goldEarned: number;
+}
+
+// ARAM 전적 통계
+export interface AramMatchStat {
+  matchId: string;
+  championName: string;
+  kills: number;
+  deaths: number;
+  assists: number;
+  win: boolean;
+  gameCreation: number;
+  gameDuration: number;
+}
+
+// ARAM 전적 요약
+export interface AramStatsSummary {
+  matches: AramMatchStat[];
+  summary: {
+    wins: number;
+    losses: number;
+    totalGames: number;
+  };
+}
+
+
